@@ -1,0 +1,63 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "5279abc17d85e139e9e79b01a9349801",
+    "packages": [
+        {
+            "name": "mercadopago/magento2-plugin",
+            "version": "3.18.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mercadopago/cart-magento2.git",
+                "reference": "474f7393c2c2aba7b2a586dc43a7a65109d564d7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mercadopago/cart-magento2/zipball/474f7393c2c2aba7b2a586dc43a7a65109d564d7",
+                "reference": "474f7393c2c2aba7b2a586dc43a7a65109d564d7",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-mbstring": "*"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "src/MercadoPago/Core/registration.php"
+                ],
+                "psr-4": {
+                    "MercadoPago\\Core\\": "src/MercadoPago/Core"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Mercado Pago",
+                    "email": "plugins.dev@mercadopago.com"
+                }
+            ],
+            "description": "Mercado Pago Magento 2 Plugin",
+            "support": {
+                "source": "https://github.com/mercadopago/cart-magento2/tree/v3.18.0"
+            },
+            "time": "2022-11-16T18:32:58+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
+}
