@@ -1,2 +1,13 @@
-src/*
-!src/app/
+*
+!/.gitignore
+!/src
+!/src/*/
+!/src/app/*/
+!/src/app/code/**
+!/src/app/design/**
+!/src/app/etc/config.php
+!/src/app/i18n/**
+!/composer.json
+!/composer.lock
+!/README.md
+!/compose*
