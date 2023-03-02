@@ -1,7 +1,12 @@
 *
 !/.gitignore
+!/src
+!/src/app
+!/src/app/etc/
 !/src/app/code/
+!/src/app/code/**
 !/src/app/design/
+!/src/app/design/**
 !/src/app/etc/config.php
 !/composer.json
 !/composer.lock
