@@ -1,18 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace Estudo\QuickLearn\Setup\Patch\Data;
+namespace Estudo\Teste\Setup\Patch\Data;
 
-use Magento\Framework\Exception\InputException;
-use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\Framework\Exception\StateException;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Magento\Catalog\Api\Data\CategoryInterfaceFactory;
 use Magento\Catalog\Api\Data\CategoryInterface;
 use Magento\Catalog\Api\CategoryRepositoryInterface;
 use Magento\Framework\Setup\Patch\PatchRevertableInterface;
-use Magento\Framework\Exception\CouldNotSaveException;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Registry;
 
 /**
  * Patch to create Teste category
@@ -32,15 +30,20 @@ class CreateCategory implements DataPatchInterface, PatchRevertableInterface
      * @param ModuleDataSetupInterface $moduleDataSetup
      * @param CategoryInterfaceFactory $categoryFactory
      * @param CategoryRepositoryInterface $categoryRepository
+     * @param Registry $registry
      */
     public function __construct(
         ModuleDataSetupInterface $moduleDataSetup,
         CategoryInterfaceFactory $categoryFactory,
-        CategoryRepositoryInterface $categoryRepository
+        CategoryRepositoryInterface $categoryRepository,
+        Registry $registry
     ) {
         $this->moduleDataSetup = $moduleDataSetup;
         $this->categoryFactory = $categoryFactory;
         $this->categoryRepository = $categoryRepository;
+        if (!$registry->registry('isSecureArea')) {
+            $registry->register('isSecureArea', true);
+        }
     }
 
     /**
@@ -50,7 +53,7 @@ class CreateCategory implements DataPatchInterface, PatchRevertableInterface
      * If we speak about data, under revert means: $transaction->rollback()
      *
      * @return $this
-     * @throws CouldNotSaveException
+     * @throws LocalizedException
      */
     public function apply(): self
     {
@@ -108,9 +111,7 @@ class CreateCategory implements DataPatchInterface, PatchRevertableInterface
      * Rollback all changes, done by this patch
      *
      * @return void
-     * @throws InputException
-     * @throws NoSuchEntityException
-     * @throws StateException
+     * @throws LocalizedException
      */
     public function revert(): void
     {
@@ -124,7 +125,9 @@ class CreateCategory implements DataPatchInterface, PatchRevertableInterface
             self::URL_KEY
         );
 
-        $this->categoryRepository->delete($category);
+        if ($category) {
+            $this->categoryRepository->delete($category);
+        }
 
         $this->moduleDataSetup->getConnection()->endSetup();
     }
